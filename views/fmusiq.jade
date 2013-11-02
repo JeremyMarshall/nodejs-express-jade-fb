@@ -1,0 +1,40 @@
+html(xmlns:fb="https://www.facebook.com/2008/fbml")
+  body
+    script.
+      /* All Facebook functions should be included
+         in this function, or at least initiated from here */
+      window.fbAsyncInit = function() {
+        FB.init({appId: '416263898496862',
+                 status: true,
+                 cookie: true,
+             xfbml: true});
+        FB.api('/me', function(response) {
+          console.log(response.name);
+        });
+        var disconnectBtn = document.getElementById('sample-disconnect')
+        if (disconnectBtn) {
+          disconnectBtn.onclick = function() {
+              FB.api({ method: 'auth.revokeauthorization' }, safeReload)
+          }
+        }
+        var logoutBtn = document.getElementById('sample-logout')
+        if (logoutBtn) {
+          logoutBtn.onclick = function() {
+            FB.logout()
+          }
+        }
+      };
+      (function() {
+        var e = document.createElement('script'); e.async = true;
+        e.src = document.location.protocol +
+          '//connect.facebook.net/en_US/all.js';
+        document.getElementById('fb-root').appendChild(e);
+      }());    div#fb-root
+
+    button#sample-logout Logout
+    button#sample-disconnect Disconnect
+
+
+
+
+
