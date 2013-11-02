@@ -26,13 +26,19 @@ html(xmlns:fb="https://www.facebook.com/2008/fbml")
           }
         }
       };
-      (function() {
-        var e = document.createElement('script'); e.async = true;
-        e.src = document.location.protocol +
-          '//connect.facebook.net/en_US/all.js';
-        var fbr = document.getElementById('fb-root');
-        fbr.appendChild(e);
-      }());
+
+
+      // Load the Facebook JS SDK
+      window.setTimeout(function() {
+        (function(d) {
+          var js, id = 'facebook-jssdk', ref = d.getElementsByTagName('script')[0];
+          if (d.getElementById(id)) {return;}
+
+          js = d.createElement('script'); js.id = id; js.async = true;
+          js.src = '//connect.facebook.net/en_US/all.js';
+          ref.parentNode.insertBefore(js, ref);
+        }(document));
+      }, 0);
 
     button#sample-logout Logout
     button#sample-disconnect Disconnect
