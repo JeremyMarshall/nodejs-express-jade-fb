@@ -169,9 +169,10 @@ app.all('/', function(req, res, next){
                     console.error(er)
                     return sendLogin(req, res, next)
                 }
-                var conf = {canvasURL:canvasURL,
-                            appId:FBAPP.id,
-                            reloadOnLogout: true};
+                var conf = {canvasURL: canvasURL,
+                            appId: FBAPP.id,
+                            reloadOnLogout: true,
+                            reloadOnLogin: false};
 
                 res.render('fmusiq', {me: me, conf: conf});
             }
