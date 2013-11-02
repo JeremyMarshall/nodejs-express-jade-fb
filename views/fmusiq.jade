@@ -1,5 +1,7 @@
 html(xmlns:fb="https://www.facebook.com/2008/fbml")
   body
+    div#fb-root
+
     script.
       /* All Facebook functions should be included
          in this function, or at least initiated from here */
@@ -30,10 +32,6 @@ html(xmlns:fb="https://www.facebook.com/2008/fbml")
           '//connect.facebook.net/en_US/all.js';
         document.getElementById('fb-root').appendChild(e);
       }());
-
-
-
-    div#fb-root
 
     button#sample-logout Logout
     button#sample-disconnect Disconnect
