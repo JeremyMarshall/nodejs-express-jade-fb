@@ -6,7 +6,7 @@ html(xmlns:fb="https://www.facebook.com/2008/fbml")
       function boot() {
         function safeReload() {
           if (window !== top) {
-            top.location = #{conf.canvasURL} + window.location.pathname.substr(1)
+            top.location = '#{conf.canvasURL}' + window.location.pathname.substr(1)
           } else {
             window.location.reload()
           }
