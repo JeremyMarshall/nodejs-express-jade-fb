@@ -169,7 +169,11 @@ app.all('/', function(req, res, next){
                     console.error(er)
                     return sendLogin(req, res, next)
                 }
-                res.render('fmusiq', {me: me});
+
+                conf.canvasURL = canvasURL
+                conf.appId = FBAPP.id
+
+                res.render('fmusiq', {me: me, conf: JSON.stringify(conf)});
             }
         )
     } else {
