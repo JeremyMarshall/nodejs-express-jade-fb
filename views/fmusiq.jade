@@ -28,12 +28,12 @@ html(xmlns:fb="https://www.facebook.com/2008/fbml")
           if (disconnectBtn) {
             disconnectBtn.onclick = function() {
                 FB.api({ method: 'auth.revokeauthorization' }, safeReload)
-                }
-                }
+            }
+          }
 
-                var logoutBtn = document.getElementById('sample-logout')
-                if (logoutBtn) {
-                logoutBtn.onclick = function() {
+          var logoutBtn = document.getElementById('sample-logout')
+          if (logoutBtn) {
+            logoutBtn.onclick = function() {
                 FB.logout()
             }
           }
