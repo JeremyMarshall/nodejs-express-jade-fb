@@ -169,7 +169,7 @@ app.all('/', function(req, res, next){
                     console.error(er)
                     return sendLogin(req, res, next)
                 }
-                res.render('fmusiq');
+                res.render('fmusiq', {me: me});
             }
         )
     } else {
