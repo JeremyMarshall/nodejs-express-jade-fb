@@ -173,7 +173,7 @@ app.all('/', function(req, res, next){
                             appId:FBAPP.id,
                             reloadOnLogout: true};
 
-                res.render('fmusiq', {me: me, conf: JSON.stringify(conf)});
+                res.render('fmusiq', {me: me, conf: conf});
             }
         )
     } else {

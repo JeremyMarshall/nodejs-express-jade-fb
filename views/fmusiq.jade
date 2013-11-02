@@ -3,10 +3,10 @@ html(xmlns:fb="https://www.facebook.com/2008/fbml")
     div#fb-root
 
     script.
-      function boot(conf) {
+      function boot() {
         function safeReload() {
           if (window !== top) {
-            top.location = conf.canvasURL + window.location.pathname.substr(1)
+            top.location = #{conf.canvasURL} + window.location.pathname.substr(1)
           } else {
             window.location.reload()
           }
@@ -15,10 +15,10 @@ html(xmlns:fb="https://www.facebook.com/2008/fbml")
         // This is copy pasted from:
         // https://developers.facebook.com/docs/reference/javascript/
         window.fbAsyncInit = function() {
-          if (conf.reloadOnLogin) FB.Event.subscribe('auth.login', safeReload)
-          if (conf.reloadOnLogout) FB.Event.subscribe('auth.logout', safeReload)
+          if (#{conf.reloadOnLogin}) FB.Event.subscribe('auth.login', safeReload)
+          if (#{conf.reloadOnLogout}) FB.Event.subscribe('auth.logout', safeReload)
           FB.init({
-          appId: String(conf.appId),
+          appId: '#{conf.appId}',
             status: true,
             cookie: true,
             xfbml: true
@@ -50,7 +50,7 @@ html(xmlns:fb="https://www.facebook.com/2008/fbml")
           }(document));
         }, 0)
       }
-      boot(#{conf})
+      boot()
     p
       Welcome #{me.name}  with ID  #{me.id}
     p
