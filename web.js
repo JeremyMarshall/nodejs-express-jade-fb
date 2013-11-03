@@ -41,20 +41,6 @@ function loginURL(redirectURI) {
   })
 }
 
-// Inline our JavaScript and boot() it.
-var externalJS = fs.readFileSync(__dirname + '/client.js', 'utf8')
-function js(conf) {
-  conf.canvasURL = canvasURL
-  conf.appId = FBAPP.id
-  return (
-    '<div id="fb-root"></div>' +
-    '<script>' +
-      externalJS +
-      'boot(' + JSON.stringify(conf) + ')' +
-    '</script>'
-  )
-}
-
 // Get the access_token from the signed request.
 // https://developers.facebook.com/docs/authentication/server-side/
 function getAccessToken(sr, cb) {
@@ -64,10 +50,9 @@ function getAccessToken(sr, cb) {
   if (!sr.code)
     return process.nextTick(cb.bind(null, new Error('no token or code')))
   request.get(
-    {
-      url: 'https://graph.facebook.com/oauth/access_token',
+    { url: 'https://graph.facebook.com/oauth/access_token',
       qs: {
-        client_id: FBAPP.id,
+      client_id: FBAPP.id,
         client_secret: FBAPP.secret,
         code: sr.code,
         redirect_uri: '' // the cookie uses a empty redirect_uri
@@ -124,7 +109,6 @@ function sendLogin(req, res, next) {
 var app = express()
 app.use(express.bodyParser())
 app.use(express.cookieParser())
-
 app.set('views', __dirname + '/views');
 app.set('view engine', 'jade');
 
@@ -159,7 +143,6 @@ app.all('*', function(req, res, next) {
   }
 })
 
-
 app.all('/', function(req, res, next){
     if (req.signedRequest && req.signedRequest.user_id) {
         graphMe(
@@ -174,38 +157,12 @@ app.all('/', function(req, res, next){
                             reloadOnLogout: true,
                             reloadOnLogin: false};
 
-                res.render('fmusiq', {me: me, conf: conf});
+                res.render('canvas', {me: me, conf: conf});
             }
         )
     } else {
         sendLogin(req, res, next)
     }
-})
-
-
-// Sample home page.
-app.all('/xxx', function(req, res, next) {
-  if (req.signedRequest && req.signedRequest.user_id) {
-    graphMe(
-      req.signedRequest,
-      function(er, me) {
-        if (er) {
-          console.error(er)
-          return sendLogin(req, res, next)
-        }
-        res.send(
-          200,
-          '<!doctype html>' +
-          'Welcome ' + me.name + ' with ID ' + me.id + '.<br>' +
-          '<button id="sample-logout">Logout</button> ' +
-          '<button id="sample-disconnect">Disconnect</button>' +
-          js({ reloadOnLogout: true })
-        )
-      }
-    )
-  } else {
-    sendLogin(req, res, next)
-  }
 })
 
 // Start your engines.
