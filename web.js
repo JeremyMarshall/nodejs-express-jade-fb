@@ -108,6 +108,7 @@ function sendLoginx(req, res, next) {
 function sendLogin(req, res, next) {
     var conf = {canvasURL: canvasURL,
         appId: FBAPP.id,
+        scope:  FBAPP.scope,
         reloadOnLogout: false,
         reloadOnLogin: true};
     res.render('login', {conf: conf});
