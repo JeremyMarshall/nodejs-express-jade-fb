@@ -89,7 +89,7 @@ function graphMe(sr, cb) {
 }
 
 // Send the login page response.
-function sendLogin(req, res, next) {
+function sendLoginx(req, res, next) {
   res.send(
     200,
     '<!doctype html>' +
@@ -102,6 +102,15 @@ function sendLogin(req, res, next) {
     '</div>' +
     js({ reloadOnLogin: true })
   )
+}
+
+// Send the login page response.
+function sendLogin(req, res, next) {
+    var conf = {canvasURL: canvasURL,
+        appId: FBAPP.id,
+        reloadOnLogout: false,
+        reloadOnLogin: true};
+    res.render('login', {conf: conf});
 }
 
 // Our Express Application:
